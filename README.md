@@ -9,3 +9,9 @@
     * `finish` => 完成文章
     * `chore` => 项目工程的改动
     * `docs` => 修改 `README`
+
+## 目录
+
+### 自动化测试
+
+1. [探索 TypeScript + Jest 开源项目的自动化测试（上）](https://github.com/vabaly/blog/issues/1)
