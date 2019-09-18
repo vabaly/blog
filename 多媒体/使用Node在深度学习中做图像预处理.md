@@ -128,7 +128,7 @@ function adjustBrightness(inputPath, outputPath, brightness, callback) {
 
 我把亮度从 0 - 200 的图片都生成了出来，并进行了对比，选出了一个亮度处理较为合适的区间。可以看看 0 - 200 之间相邻亮度相差为 10 的图片之间的差别（*提示：每张图片的左上角标识出了该图片的亮度*）：
 
-![亮度](https://raw.githubusercontent.com/vabaly/picture/master/merge_from_ofoct%20(1).png)
+![亮度](https://raw.githubusercontent.com/vabaly/picture/master/imagesbrightness.png)
 
 可以看到亮度为 60 以下的图片，都太暗了，细节不够明显，亮度为 150 以上的图片，都太亮了，也是细节不够明显。而经过多张图片综合对比之后，我认为 [60, 140] 这个区间的图片质量比较好，与原图相比不会丢失太多细节。
 
@@ -157,7 +157,7 @@ function adjustSaturation(inputPath, outputPath, saturation, callback) {
 
 同样按调节亮度的方法来确定饱和度的范围以及训练集中相邻两张图片的饱和度相差多少。可以看看相邻饱和度相差为 10 的图片之间的差别（*提示：每张图片的左上角标识出了该图片的饱和度*）：
 
-![饱和度](https://raw.githubusercontent.com/vabaly/picture/master/merge_from_ofoct%20(2).png)
+![饱和度](https://raw.githubusercontent.com/vabaly/picture/master/imagessaturation.png)
 
 调节饱和度的产生的图片细节没有丢，大多都能够用作训练集中的图片，与亮度一样，饱和度相差 20 的两张图片差异性明显。另外，饱和度大于 140 的时候，图片改变就不明显了。**所以调节饱和度产生的新图片将会是 6 张。从饱和度为 0 的图片开始，每增加 20 饱和度就选出来加入训练集，直到饱和度为 140 的图片，其中饱和度为 100 的图片不算。**
 
