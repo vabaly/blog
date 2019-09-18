@@ -21,11 +21,11 @@
 1. **调节色相**。这个相当于给整个图片变颜色一样，想象一下以前调出来的绿色电视。
 1. **调节对比度**。这个会让图片亮的地方更亮，暗的地方更暗。也可以想象一下电视上的对比度调节，不得不说电视机启蒙了这些专业名词。
 
-上述每项操作都需要视场景而选择，目前适用于我们团队的处理方式主要也就是上面这些。还有一些白化、Gamma 处理等由于对图像学研究不深，就不展开叙述了。
+上述每项操作都需要视场景而选择，目前适用于我们团队的处理方式主要也就是上面这些。还有一些白化、Gamma 处理等操作，由于不是那么直观，有兴趣的人可以自己去了解。
 
 ## 安装 `gm`
 
-`gm` 是一个图片处理的 `npm` 库，性能在 `Node.js` 库中应该算佼佼者了，它底层默认使用的是 `GraphicsMagick`，所以你需要先安装 `GraphicsMagick`，在 Mac 系统中直接用 `Homebrew` 安装：
+[ gm ](https://github.com/aheckmann/gm) 是一个图片处理的 `npm` 库，性能在 `Node.js` 库中应该算佼佼者了，它底层默认使用的是 `GraphicsMagick`，所以你需要先安装 `GraphicsMagick`，在 Mac 系统中直接用 `Homebrew` 安装：
 
 ```sh
 brew install graphicsmagick
@@ -47,7 +47,7 @@ npm i gm -S
 
 ![示例图片](https://raw.githubusercontent.com/vabaly/picture/master/demo-public.png)
 
-另外，每种预处理方法的示例代码中的函数名都是参照 `Tensorflow` 中 `Image` 模块的同名方法而定，更多处理图片的方法可以[前往 Tensorflow 文档官网]()自行查看，同时去[ gm 官方文档 ](http://aheckmann.github.io/gm/docs.html) 中寻找相同作用的方法。
+另外，在本文的示例代码中，每种预处理方法的函数名都是参照 `Tensorflow` 中 `Image` 模块的同名方法而定，更多处理图片的方法可以[前往 Tensorflow 文档官网](https://www.tensorflow.org/api_docs/python/tf/image)自行查看，同时去[ gm 官方文档 ](http://aheckmann.github.io/gm/docs.html) 中寻找相同作用的方法。
 
 ### 翻转
 
@@ -99,7 +99,7 @@ function flop(inputPath, outputPath, callback) {
 
 ![Flip and flop](https://raw.githubusercontent.com/vabaly/picture/master/demo-public-flip-flop.png)
 
-如果把原图看成一个前端组件，即一个购物按钮组，里面的每个按钮的背景可以自定义，按钮里面由文字、分隔线、文字组成，那么上面的翻转后的图片是可以看成是同一个组件的，即可以拿来作为训练集。
+**如果把原图看成一个前端组件，即一个购物按钮组，里面每个按钮的背景可以自定义，按钮里面由文字、分隔线、文字三种元素组成，那么上面翻转后的图片是可以看成同一个组件的，即可以拿来作为训练集。**
 
 有时候，翻转带来的效果并不是自己想要的，可能翻转后，和原来的图片就不应该视作同一个东西了，这时候这种方法就有局限性了。
 
@@ -124,17 +124,17 @@ function adjustBrightness(inputPath, outputPath, brightness, callback) {
 }
 ```
 
-`.modulate` 方法是一个多功能的方法，可以同时调整亮度、饱和度、色相，分别对应该方法的三个参数，这里只调整亮度，所以只改变第一个参数，其他保持 100 基准值不变。
+`.modulate` 方法是一个多功能的方法，可以同时调整图片的亮度、饱和度和色相三种特性，这三种特性分别对应着该方法的三个参数，这里只调整亮度，所以只改变第一个参数（比 100 高则是增加亮度，比 100 低则是减少亮度），其他保持 100 基准值不变。
 
-我把亮度从 0 - 200 的处理图片都生成了出来，并进行了对比，选出了一个亮度处理较为合适的区间。可以看看 0 - 200 之间比较典型的一些图片：
+我把亮度从 0 - 200 的图片都生成了出来，并进行了对比，选出了一个亮度处理较为合适的区间。可以看看 0 - 200 之间相邻亮度相差为 10 的图片之间的差别（*提示：每张图片的左上角标识出了该图片的亮度*）：
 
 ![亮度](https://raw.githubusercontent.com/vabaly/picture/master/merge_from_ofoct%20(1).png)
 
-可以看到亮度为 60 以下的图片，都太暗了，细节不够明显，亮度为 150 以上的图片，都太亮了，也是细节不够明显。而经过多张图片综合对比之后，我认为 [80, 130] 这个区间的图片质量比较好，与原图相比不会丢失太多细节。
+可以看到亮度为 60 以下的图片，都太暗了，细节不够明显，亮度为 150 以上的图片，都太亮了，也是细节不够明显。而经过多张图片综合对比之后，我认为 [60, 140] 这个区间的图片质量比较好，与原图相比不会丢失太多细节。
 
-再来看看亮度为 50 和 60 两张图片，其实看起来像是一张图片一样，不符合训练集多样性的原则，更何况是相邻亮度的两张图片。所以最终决定取作训练集的相邻两张图片亮度差为 20，这样差异就比较明显，比如亮度为 80 和亮度为 100 的两张图片。
+再来看看亮度为 50 和 60 的两张图片，其实看起来像是一张图片一样，不符合训练集多样性的原则，更何况是相邻亮度相差为 1 的两张图片。所以最终决定作为训练集的相邻两张图片亮度差为 20，这样差异就比较明显，比如亮度为 80 和亮度为 100 的两张图片。
 
-最终，调节亮度产生的新图片将会是 4 张。从亮度为 80 的图片开始，每增加 20 亮度就选出来加入训练集，直到亮度为 130 的图片，其中亮度为 100 的图片不算。
+最终，调节亮度产生的新图片将会是 4 张。**从亮度为 60 的图片开始，每增加 20 亮度就选出来加入训练集，直到亮度为 140 的图片，其中亮度为 100 的图片不算。**
 
 ### 调节饱和度
 
@@ -148,38 +148,38 @@ function adjustBrightness(inputPath, outputPath, brightness, callback) {
  * @param saturation 图像饱和度的值，基准值是 100，比 100 高则是增加饱和度，比 100 低则是减少饱和度
  * @param callback 处理后的回调函数
  */
-function adjustBrightness(inputPath, outputPath, saturation, callback) {
+function adjustSaturation(inputPath, outputPath, saturation, callback) {
     gm(inputPath)
         .modulate(100, saturation, 100)
         .write(outputPath, callback);
 }
 ```
 
-同样按调节亮度的方法来确定饱和度的范围以及训练集中相邻两张图片的饱和度相差多少。可以看看相邻饱和度相差为 10 的图片之间的差别：
+同样按调节亮度的方法来确定饱和度的范围以及训练集中相邻两张图片的饱和度相差多少。可以看看相邻饱和度相差为 10 的图片之间的差别（*提示：每张图片的左上角标识出了该图片的饱和度*）：
 
 ![饱和度](https://raw.githubusercontent.com/vabaly/picture/master/merge_from_ofoct%20(2).png)
 
-调节饱和度的产生的图片细节没有丢，大多都能够用作训练集中的图片，与亮度一样，饱和度相差 20 的两张图片差异性明显。另外，饱和度大于 140 的时候，图片改变就不明显了。所以调节饱和度产生的新图片将会是 6 张。从饱和度为 0 的图片开始，每增加 20 饱和度就选出来加入训练集，直到饱和度为 140 的图片，其中饱和度为 100 的图片不算。
+调节饱和度的产生的图片细节没有丢，大多都能够用作训练集中的图片，与亮度一样，饱和度相差 20 的两张图片差异性明显。另外，饱和度大于 140 的时候，图片改变就不明显了。**所以调节饱和度产生的新图片将会是 6 张。从饱和度为 0 的图片开始，每增加 20 饱和度就选出来加入训练集，直到饱和度为 140 的图片，其中饱和度为 100 的图片不算。**
 
 ### 调节色相
 
-调节色相的方法在此场景下是最有用的方法，产生的训练集最多，率先来看下色相相邻为 10 的图片之间的差距吧：
+调节色相的方法在此场景下是最有用的方法，产生的训练集最多，率先来看下色相相邻为 10 的图片之间的差距吧（*提示：每张图片的左上角标识出了该图片的色相*）：
 
 ![色相](https://raw.githubusercontent.com/vabaly/picture/master/hue.png)
 
-几乎每个图片都能作为新的训练集，由于色相调节范围只能在 0 - 200 之间，所以从色相为 0 的图片开始，每增加 10 色相就选出来加入训练集，直到色相为 190 的图片，其中色相为 100 的图片不算。这样就能够产生 20 张图片作为训练集。
+几乎每个图片都能作为新的训练集，由于色相调节范围只能在 0 - 200 之间，**所以从色相为 0 的图片开始，每增加 10 色相就选出来加入训练集，直到色相为 190 的图片，其中色相为 100 的图片不算。** 这样就能够产生 20 张图片作为训练集。
 
-至于调节训练集的代码则和亮度、饱和度一样，只是改变了第三个参数：
+至于调节色相的代码则和亮度、饱和度一样，只是改变了第三个参数：
 
 ```js
 /**
  * 调整色相
  * @param inputPath 输入的图像文件路径
  * @param outputPath 输出的图像文件路径
- * @param hue 图像色相的值，基准值是 100，比 100 高则是增加饱和度，比 100 低则是减少饱和度
+ * @param hue 图像色相的值，基准值是 100，比 100 高则是增加色相，比 100 低则是减少色相
  * @param callback 处理后的回调函数
  */
-function adjustBrightness(inputPath, outputPath, hue, callback) {
+function adjustHue(inputPath, outputPath, hue, callback) {
     gm(inputPath)
         .modulate(100, 100, hue)
         .write(outputPath, callback);
@@ -197,7 +197,7 @@ function adjustBrightness(inputPath, outputPath, hue, callback) {
  * 调整对比度
  * @param inputPath 输入的图像文件路径
  * @param outputPath 输出的图像文件路径
- * @param multiplier 对比度的乘积，默认是 0，可以为负值
+ * @param multiplier 调节对比度的因子，默认是 0，可以为负值，n 表示增加 n 次对比度，-n 表示降低 n 次对比度
  * @param callback 处理后的回调函数
  */
 function adjustContrast(inputPath, outputPath, multiplier, callback) {
@@ -207,7 +207,7 @@ function adjustContrast(inputPath, outputPath, multiplier, callback) {
 }
 ```
 
-下面是对比度乘积从 -10 到 10 之间的图像，可以看到图片质量较好的区间是 [-5, 2]，其他都会丢失一些细节。另外相邻对比度图片之间的差异也比较明显，所以可以每个对比度的图片都可作为训练集，这样又多出 7 张图片。
+下面是对比度因子从 -10 到 10 之间的图像，可以看到图片质量较好的区间是 [-5, 2]，其他都会丢失一些细节。另外相邻对比度因子的图片之间的差异也比较明显，所以每张图片都可作为训练集，这样又多出 7 张图片。
 
 ![对比度](https://raw.githubusercontent.com/vabaly/picture/master/contrast.png)
 
@@ -215,4 +215,10 @@ function adjustContrast(inputPath, outputPath, multiplier, callback) {
 
 通过上述 5 种方法，可以在一张图片的基础上额外获得 40 张图片，即训练集是原来的 40 倍。这还是在没有多种方法混合使用的情况下，如果混合使用，恐怕几百倍都不止。
 
-`gm` 还支持对图片进行其他处理方式，你可以自己去发掘，每种方式在特定场景下都有自己的局限性，需要你去甄选。
+`gm` 还支持对图片进行其他处理方式，你可以自己去发掘，每种方式在特定场景下都有自己的局限性，需要你去甄选。希望大家都有一个自己满意的训练集。
+
+## 宣传
+
+欢迎大家 [Star 笔者的 Github](https://github.com/vabaly/blog)，另外，也欢迎大家关注笔者的公众号，获取最新文章的推送：
+
+![微信公众号二维码](https://raw.githubusercontent.com/vabaly/picture/master/imageswechat-qrcode.jpg)
