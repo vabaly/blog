@@ -1,4 +1,4 @@
-# 探索 `TypeScript + Jest` 开源项目的自动化测试（上）
+# 探索 TypeScript + Jest 开源项目的自动化测试（上）
 
 ## 前言
 
@@ -301,6 +301,6 @@ globals: {
 
 ## 宣传
 
-另外，也欢迎大家关注笔者的公众号，获取最新文章的推送：
+欢迎大家 [Star 笔者的 Github](https://github.com/vabaly/blog)，另外，也欢迎大家关注笔者的公众号，获取最新文章的推送：
 
 ![微信公众号二维码](https://raw.githubusercontent.com/vabaly/picture/master/imageswechat-qrcode.jpg)
