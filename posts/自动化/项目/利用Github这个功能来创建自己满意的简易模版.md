@@ -33,10 +33,70 @@
 
 ### Commit 规范
 
-优秀的开源项目往往都有规范、容易阅读的 Commit 信息，我们可以借助一些工具来帮助我们规范提交。可以从以下几点入手：
+优秀的开源项目往往都有规范、容易阅读的 Commit 信息，我们可以借助一些工具来帮助我们规范提交。可以从以下两点入手：
 
 1. 在写 Commit 信息时提醒如何填写关键信息，例如提交类型、涉及更改的文件等；
+
+    为了实现这一点，我们可以借助 `husky` 来指定 `prepare-commit-msg` 钩子触发时执行的脚本，也就是在 `git commit` 运行后立马执行的脚本。该脚本实际执行的程序可以使用 `commitizen`，我们可以在 `package.json` 中这样写：
+
+    ```jsonc
+    {
+        // 其他配置......
+        "husky": {
+            "hooks": {
+                "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+            }
+        }
+        // 其他配置......
+    }
+    ```
+
+    `commitizen` 就是一款提示你如何填写 Commit 的命令行工具，可通过 `git cz` 直接调用。它本身不包含 Commit 规范，需要另外再安装一个规范库来搭配使用，比较流行的规范是 Angular 团队的 Commit 规范，对应的包是 `cz-conventional-changelog`，你需要在 `package.json` 中写下如下配置才能让 `commitizen` 使用这个规范：
+
+    ```jsonc
+    {
+        // 其他配置......
+        "config": {
+            "commitizen": {
+                "path": "./node_modules/cz-conventional-changelog"
+            }
+        }
+        // 其他配置......
+    }
+    ```
+
+    另外，别忘记在 `package.json` 的 `devDependencies` 中加入上述包。
+
 1. 提交 Commit 信息时验证其是否符合 Commit 规范。
+
+    要实现这一点，我们同样要借助 `husky`，在 `commit-msg` 钩子这执行检验 Commit 的命令，负责这一命令的工具是 `@commitlint/cli`，它也不包含校验的规则，需要另外安装 `@commitlint/config-conventional` 来让 `commitlint` 明确是按 Angular 团队的规范来校验 Commit 信息。你需要在 `pakcage.json` 中写下如下的配置：
+
+    ```jsonc
+    {
+        // 其他配置......
+        "husky": {
+            "hooks": {
+                "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+                // husky 新增的配置，运行 commitlint 命令
+                "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+            }
+        },
+        // commitlint 配置
+        "commitlint": {
+            "extends": [
+                // commitlint 校验的规范标准
+                "@commitlint/config-conventional"
+            ]
+        }
+        // 其他配置......
+    }
+    ```
+
+    同样别忘记在 `package.json` 中加入上述包。
+
+上述两个内容配置好后，你可以直接在项目模版中随便改个东西，`git add` 它，再运行 `git commit`，会产生以下的效果：
+
+![Commit 运行效果](https://raw.githubusercontent.com/vabaly/picture/master/render1570712509623.gif)
 
 ### 文档
 
@@ -45,29 +105,3 @@
 ### 协议
 
 养成书写协议的习惯，从而对多数开源项目的版权有一定了解，也对自己未来的开源项目需要使用哪些协议有清晰的认识。一般来说都是采用 `MIT` 协议，这是最为宽松的协议。**如果你还不知道该是使用什么协议，[这个网站可以帮到你](http://choosealicense.online/)。**
-
-<!-- ## 示例：创建一个「命令行工具」的 `TypeScript` 项目模版
-
-### 创建仓库
-
-在本地新建一个文件夹，命名规范点，让自己一看到就明白这是什么类型的项目模版，比如我给这个项目取名为 `typescript-command-line-tool-template`，一看就知道这是命令行工具类的项目模版，并且是用 `TypeScript` 编写的。
-
-### 语言选型
-
-因为我个人是比较喜欢 `TypeScript` 的类型特性，所以大多数项目我都是用 `TypeScript` 开发的。基于这个现象，创建一个 `TypeScript` 项目模版就比较适合我。这就是所谓的个性化，我不需要一个 CLI 工具让我每次都选择 `TypeScript`，我也不希望每次在创建好项目后还要将 `tsconfig.json` 配置修改成我喜欢的样子等等。
-
-#### 快速创建 `tsconfig.json`
-
-在项目目录下安装 `typescript` 包，并且使用 `npx tsc --init` 来创建一个 `tsconfig.json` 配置文件：
-
-```sh
-npm i typescript -D
-npx tsc --init
-```
-
-现在，开始个性化你的 `tsconfig.json` 吧。
-
-### 编码规范
-
-接下来，项目模版需要考虑一套编码规范来约束这类项目的编程风格和 -->
-
