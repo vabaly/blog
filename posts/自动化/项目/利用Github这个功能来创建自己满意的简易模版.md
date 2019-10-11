@@ -6,7 +6,7 @@
 1. 5 个开源项目（模版）要考虑的工程化要素
 1. 一些创建项目（模版）时提升效率的技巧
 
-讲解过程中会以[我的一个模版仓库](https://github.com/vabaly/typescript-command-line-tool-template)为例，如有常用 `TypeScript` 和 `VSCode` 的读者，食用起来会更佳。
+讲解过程中可以同时参考[我写的一个模版仓库样例](https://github.com/vabaly/typescript-command-line-tool-template)，如有常用 `TypeScript` 和 `VSCode` 的读者，食用起来会更佳。
 
 ## 目录
 
@@ -247,3 +247,9 @@ jobs:
 ![use this template](https://raw.githubusercontent.com/vabaly/picture/master/20191011-use-this-template.png)
 
 点击此按钮就可以基于该仓库创建一个新的仓库，试试看吧。
+
+## 宣传
+
+欢迎大家 [Star 笔者的 Github](https://github.com/vabaly/blog)，另外，也欢迎大家关注笔者的公众号，获取最新文章的推送：
+
+![微信公众号二维码](https://raw.githubusercontent.com/vabaly/picture/master/imageswechat-qrcode.jpg)
