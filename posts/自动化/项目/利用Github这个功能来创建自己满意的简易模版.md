@@ -20,7 +20,9 @@
         - [Tips](#commit-tips)
     - [CI / CD](#ci-cd)
     - [文档](#docs)
+    - [CHANGELOG](#changelog)
     - [协议](#license)
+    - [`.github` 目录](#github)
  - [基于模版仓库创建新的项目](#create)
     - [设置仓库为模版仓库](#template)
     - [使用模版仓库](#using)
@@ -159,7 +161,7 @@
 
 `Github Actions` 首次使用需要用户去它的[官网](https://github.com/features/actions)申请，申请好了以后，就会发现自己的所有仓库中都会有个 `Actions` 的选项卡，这里面就能看到该仓库的 CI / CD 的情况。
 
-所以，在你的项目模版里，可以新建一个 `.github` 文件夹，并且在该文件夹下新建一个 `workflows` 文件夹，然后在这个文件夹下随便建一个 `.yml` 文件，一般叫 `build.yml`，因为在 `README` 的徽章里会使用这个名字，如果 CI / CD 通过的话，则这个徽章会显示绿色的，并且文字是 `build passing`。
+所以，在你的项目或项目模版里，可以新建一个 `.github` 文件夹，并且在该文件夹下新建一个 `workflows` 文件夹，然后在这个文件夹下随便建一个 `.yml` 文件，一般叫 `build.yml`，因为在 `README` 的徽章里会使用这个名字，如果 CI / CD 通过的话，则这个徽章会显示绿色的，并且文字是 `build passing`。
 
 例如，如果你的项目需要跑一下测试，`build.yml` 里面就能这么写：
 
@@ -198,17 +200,34 @@ jobs:
             npm run test
 ```
 
-想要了解更多 `Github Actions` 的内容，可以直接查看[官方的中文文档](https://help.github.com/cn/articles/about-github-actions)，写的挺详细的。
+想要了解更多 `Github Actions` 的内容，可以直接查看[官方的中文文档](https://help.github.com/cn/articles/configuring-a-workflow)，写的挺详细的。
 
 ### <a name="docs" href="#docs">文档</a>
 
 良好的 `README` 文件能够使你的项目更容易理解和使用，多语言的 `README` 更会使你的项目大放异彩。一般 `README.md` 文件是英文文档，`README.zh-CN.md` 是中文文档。**强烈建议新手按照 [Standard Readme Style](https://github.com/RichardLitt/standard-readme) 规范来编写自己的文档**，多写几遍，你就明白 `README` 该写些什么东西了。
+
+### <a name="docs" href="#docs">CHANGELOG</a>
+
+几乎每一个开源项目都会写 `CHANGELOG`，它和 `README` 一样重要。请注意，`CHANGELOG` 是写给未来的自己或参与项目的其他人看的，更是写给用户看的。所以这里就不推荐自动把 `Commit` 拼凑成 `CHANGELOG` 的工具了，除非你的 `Commit` 信息写的足够人性化，那么你倒是可以用一用 [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)。
+
+我更建议新手手动写 `CHANGELOG`，和 `README` 一样，`CHANGELOG` 在社区也有一套 [keep a changelog](http://keepachangelog.com) 规范，它会教你如何把 `CHANGELOG` 写好。
 
 ### <a name="license" href="#license">协议</a>
 
 养成书写协议的习惯，从而对多数开源项目的版权有一定了解，也对自己未来的开源项目需要使用哪些协议有清晰的认识。一般来说都是采用 `MIT` 协议，这是最为宽松的协议。**如果你还不知道该是使用什么协议，[这个网站可以帮到你](http://choosealicense.online/)。**
 
 在你项目模版的 `README` 末尾，写上协议名称和作者。另外，创建一个 `LICENSE` 文件，写明协议的详细信息。
+
+### <a name="commit" href="#commit">`.github` 目录</a>
+
+如果你的项目是与人合作或者欢迎其他人来帮助改进的，那么类似这些帮助在 `Github` 上协作的文档就可以放在 `.github` 目录下。常见的会放入以下文件：
+
+1. `COMMIT_CONVENTION.md`：该文档是 `Commit` 规范的内容，帮助其他开发者知道项目需要如何 `Commit`
+1. `CONTRIBUTING.md`：该文档是告诉其他开发者要怎么样对该项目进行贡献的
+1. `ISSUE_TEMPLATE.md`：该文档是告诉提 `issue` 的用户如何写 `issue` 并提供 `issue` 模版
+1. `PULL_REQUEST_TEMPLATE.md`：该文档是告诉提 `PR` 的用户如何写 `PR` 并提供 `PR` 模版
+
+有了这些文件，会使你的项目更加友好。
 
 ## <a name="create" href="#create">基于模版仓库创建新的项目</a>
 
