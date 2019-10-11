@@ -1,9 +1,9 @@
-# 利用 Github 这个功能来创建让自己满意且个性化的项目模版
+# 利用 Github 这个功能来创建让自己满意的项目模版
 
 本文主要会讲以下几个内容：
 
 1. 1 个 Github 的模版仓库功能
-1. 5 个开源项目（模版）要考虑的工程化要素
+1. 开源项目（模版）要考虑的 8 个工程化要素
 1. 一些创建项目（模版）时提升效率的技巧
 
 讲解过程中可以同时参考[我写的一个模版仓库样例](https://github.com/vabaly/typescript-command-line-tool-template)，如有常用 `TypeScript` 和 `VSCode` 的读者，食用起来会更佳。
@@ -75,6 +75,10 @@
         ]
     }
     ```
+
+    配置好后，便可以在 `VSCode` 的命令面板中找到 `ESLint: Fix all auto-fixable Problems` 进行自动修复了：
+
+    ![eslint auto fix](https://raw.githubusercontent.com/vabaly/picture/master/images20191011-eslint-fix.png)
 
 ### <a name="test" href="#test">测试框架</a>
 
