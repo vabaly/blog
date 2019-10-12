@@ -17,7 +17,6 @@
     - [测试框架](#test)
         - [Tips](#test-tips)
     - [Commit 规范](#commit)
-        - [Tips](#commit-tips)
     - [CI / CD](#ci-cd)
     - [文档](#docs)
     - [CHANGELOG](#changelog)
@@ -167,6 +166,8 @@
 `Github Actions` 首次使用需要用户去它的[官网](https://github.com/features/actions)申请，申请好了以后，就会发现自己的所有仓库中都会有个 `Actions` 的选项卡，这里面就能看到该仓库的 CI / CD 的情况。
 
 所以，在你的项目或项目模版里，可以新建一个 `.github` 文件夹，并且在该文件夹下新建一个 `workflows` 文件夹，然后在这个文件夹下随便建一个 `.yml` 文件，一般叫 `build.yml`，因为在 `README` 的徽章里会使用这个名字，如果 CI / CD 通过的话，则这个徽章会显示绿色的，并且文字是 `build passing`。
+
+![build passing](https://raw.githubusercontent.com/vabaly/picture/master/imagesbuild-passing.png)
 
 例如，如果你的项目需要跑一下测试，`build.yml` 里面就能这么写：
 
