@@ -3,7 +3,7 @@
 本文主要会讲以下几个内容：
 
 1. `Github` 的模版仓库功能
-1. 开源项目（模版）要考虑的 8 个工程化要素
+1. 开源项目（模版）要考虑的 9 个工程化要素
 1. 一些创建项目（模版）时提升效率的技巧
 
 阅读过程中可以同时参考[我写的一个模版仓库样例](https://github.com/vabaly/typescript-command-line-tool-template)，如有常用 `TypeScript` 和 `VSCode` 的读者，食用起来会更佳。
@@ -12,6 +12,8 @@
 
 - [背景](#background)
 - [如何做到满意](#how)
+    - [TypeScript](#typescript)
+        - [Tips](#typescript-tips)
     - [编码规范](#code)
         - [Tips](#code-tips)
     - [测试框架](#test)
@@ -42,17 +44,31 @@
 
 **项目模版完全定制化，而非通用化**。这意味着无法像 CLI 工具一样通过设置问题来替换模版中相应的内容，从而做到不同喜好的人也能通过选择来生成自己想要的项目。
 
-**所以，如果你经常创建个人项目，并且每次都和前几次架构都差不多，那么通过这种方案来创建自己的模版是再简单不过的了。**
+**所以，如果你经常创建个人项目，并且每次都和前几次架构差不多，那么通过这种方法来创建自己的模版是再简单不过了。**
 
 ## <a name="how" href="#how">如何做到满意</a>
 
-在讲 `Github` 的模版仓库功能之前，我们先来谈一谈创建一个模版仓库需要考虑哪些问题才能使得这个仓库让自己满意。毕竟你需要从零开始创建一个仓库，才能够在 `Github` 上设置它为模版仓库。
+在讲 `Github` 的模版仓库功能之前，我们先来谈一谈创建一个模版仓库需要考虑哪些问题，才能使得这个仓库让自己满意。毕竟你需要从零开始创建一个仓库，才能在 `Github` 上将它设为模版仓库。
 
-一般来说，开发者总是会对自己的项目感到满意，即便以后学到新的知识后发现原来很糟糕。这是因为创建项目时已经达到了自己的现有水平，从而获得了满足感。
+一般来说，开发者总是会对自己的项目感到满意，即便以后学了新的知识发现原来很糟糕。这是因为创建项目时的所作所为已经达到了自己的现有水平，从而获得了满足感。
 
 所以，我们在建立项目的时候，应该通过对比当时一些知名的开源项目来建立满意度，而不是基于自己现有水平来建立。它们的高度更高，产生满意的情绪更难。但是一旦满意，那么你的项目高度也就上去了。
 
-**接下来，我会列举 5 个开源项目要考虑的工程化要素，并且给出一些创建项目模版时快速达到该工程化目标的技巧，希望能给大家一些启示。**
+**接下来，我会列举 9 个开源项目要考虑的工程化要素，并且给出一些创建项目模版时快速达到该工程化目标的技巧，希望能给大家一些启示。**
+
+### <a name="typescript" href="#typescript">TypeScript</a>
+
+如果你准备创建的项目满足以下任一条件，那么你就该考虑使用 `TypeScript` 来编写你的项目了：
+
+1. 从时间上看，是有可能中长期更新或者维护的项目
+1. 从空间上看，项目不是很小，有一定复杂度
+1. 从情感上看，想要引入类型系统让自己舒心，或者喜欢写类型和接口
+
+#### <a name="typescript" href="#typescript-tips">Tips</a>
+
+1. 本地安装 `typescript` 后，可以使用 `npx tsc --init` 来生成一份 `tsconfig.json` 文件。该文件列有 `TypeScript` 所有的配置，你只需要取消相应配置的注释就可以启用它了。**这个配置最好放在项目模版里，省得每次都要复制粘贴。**
+
+1. 如果你的项目模版是 `Node` 相关的，别忘了在 `package.json` 中加入 `@types/node`。
 
 ### <a name="code" href="#code">编码规范</a>
 
@@ -94,11 +110,11 @@
 
 ### <a name="commit" href="#commit">Commit 规范</a>
 
-优秀的开源项目往往都有规范、容易阅读的 Commit 信息，我们可以借助一些工具来帮助我们规范提交。可以从以下两点入手：
+优秀的开源项目往往都有规范、容易阅读的 Commit 信息，我们可以借助一些工具来帮助我们达到目的。主要是从以下两点入手：
 
 1. 在写 Commit 信息时提醒如何填写关键信息，例如提交类型、涉及更改的文件等；
 
-    为了实现这一点，我们可以借助 `husky` 来指定 `prepare-commit-msg` 钩子触发时执行的脚本，也就是在 `git commit` 运行后立马执行的脚本。该脚本实际执行的程序可以使用 `commitizen`，我们可以在 `package.json` 中这样写：
+    为了实现这一点，我们可以借助 `husky` 来指定 `prepare-commit-msg` 钩子触发时执行的命令，也就是在 `git commit` 运行后立马执行的命令。该命令实际执行的程序可以使用 `commitizen`。在 `package.json` 中这样写：
 
     ```jsonc
     {
@@ -112,7 +128,7 @@
     }
     ```
 
-    `commitizen` 就是一款提示你如何填写 Commit 的命令行工具，可通过 `git cz` 直接调用。它本身不包含 Commit 规范，需要另外再安装一个规范库来搭配使用，比较流行的规范是 Angular 团队的 Commit 规范，对应的包是 `cz-conventional-changelog`，你需要在 `package.json` 中写下如下配置才能让 `commitizen` 使用这个规范：
+    `commitizen` 就是一款提示你如何填写 Commit 的命令行工具，可通过 `git cz` 直接调用。它本身不包含 Commit 规范，需要另外安装一个规范库来搭配使用。比较流行的规范是 Angular 团队的 Commit 规范，对应的包是 `cz-conventional-changelog`。你需要在 `package.json` 中写下如下配置才能让 `commitizen` 使用这个规范：
 
     ```jsonc
     {
@@ -126,11 +142,9 @@
     }
     ```
 
-    另外，别忘记在 `package.json` 的 `devDependencies` 中加入上述包。
-
 1. 提交 Commit 信息时验证其是否符合 Commit 规范。
 
-    要实现这一点，我们同样要借助 `husky`，在 `commit-msg` 钩子这执行检验 Commit 的命令，负责这一命令的工具是 `@commitlint/cli`，它也不包含校验的规则，需要另外安装 `@commitlint/config-conventional` 来让 `commitlint` 明确是按 Angular 团队的规范来校验 Commit 信息。你需要在 `pakcage.json` 中写下如下的配置：
+    要实现这一点，我们同样要借助 `husky`，在 `commit-msg` 钩子这执行检验 Commit 的命令。负责这一命令的工具是 `@commitlint/cli`，它也不包含校验的规则，需要另外安装 `@commitlint/config-conventional` 来让 `commitlint` 明确是按 Angular 团队的规范来校验 Commit 信息。在 `pakcage.json` 这样写：
 
     ```jsonc
     {
@@ -153,21 +167,19 @@
     }
     ```
 
-    同样别忘记在 `package.json` 中加入上述包。
-
 上述两个内容配置好后，当你运行 `git commit` 的时候，会产生以下的效果：
 
 ![Commit 运行效果](https://raw.githubusercontent.com/vabaly/picture/master/render1570712509623.gif)
 
 ### <a name="ci-cd" href="#ci-cd">CI / CD</a>
 
-优秀的开源项目都会有自动化测试，而在提交代码的时候必须通过测试才能合到主分支，这个过程就可以放到 CI 上来进行。另外，如果你的项目还涉及到构建、部署等等，那就更需要 CI / CD 了。
+优秀的开源项目都会有自动化测试，而在提交代码的时候必须通过测试才能合到主分支，这个测试过程就可以放到 CI 上来进行。另外，如果你的项目还涉及到构建、部署等，那就更需要 CI / CD 了。
 
 对于在 `Github` 上开源的项目来说，`Github Actions` 就是一个非常不错的选择。
 
-`Github Actions` 首次使用需要用户去它的[官网](https://github.com/features/actions)申请，申请好了以后，就会发现自己的所有仓库中都会有个 `Actions` 的选项卡，这里面就能看到该仓库的 CI / CD 的情况。
+`Github Actions` 首次使用需要用户去它的[官网](https://github.com/features/actions)申请，申请好了以后，就会发现自己的所有仓库中都会有个 `Actions` 的选项卡，这里面就能看到该仓库 CI / CD 的情况。
 
-所以，在你的项目或项目模版里，可以新建一个 `.github` 目录，并且在该目录下新建一个 `workflows` 目录，然后在这个目录下随便建一个 `.yml` 文件，一般叫 `build.yml`，因为在 `README` 的徽章里会使用这个名字，如果 CI / CD 通过的话，则这个徽章会显示绿色的，并且文字是 `build passing`。
+所以，在你的项目或项目模版里，可以新建一个 `.github` 目录，并且在该目录下新建一个 `workflows` 目录，然后在这个目录下随便建一个 `.yml` 文件，一般叫 `build.yml`，因为在 `README` 的徽章里会使用这个名字，如果 CI / CD 通过的话，则这个徽章会显示绿色，并且文字是 `build passing`。
 
 ![build passing](https://raw.githubusercontent.com/vabaly/picture/master/imagesbuild-passing.png)
 
@@ -222,13 +234,13 @@ jobs:
 
 ### <a name="license" href="#license">协议</a>
 
-养成书写协议的习惯，从而对多数开源项目的版权有一定了解，也对自己未来的开源项目需要使用哪些协议有清晰的认识。一般来说都是采用 `MIT` 协议，这是最为宽松的协议。**如果你还不知道该是使用什么协议，[这个网站可以帮到你](http://choosealicense.online/)。**
+养成书写协议的习惯，从而对多数开源项目的版权有一定了解，也对自己未来的开源项目需要使用哪些协议有清晰的认识。一般来说都是采用 `MIT` 协议，这是最为宽松的协议。**如果你还不知道该使用什么协议，[那么这个网站可以帮到你](http://choosealicense.online/)。**
 
-在你项目模版的 `README` 末尾，写上协议名称和作者。另外，创建一个 `LICENSE` 文件，写明协议的详细信息。
+在你项目模版的 `README` 末尾，写上协议名称和仓库作者。另外再创建一个 `LICENSE` 文件，写明协议的详细信息。
 
 ### <a name="commit" href="#commit">`.github` 目录</a>
 
-如果你的项目是与人合作或者欢迎其他人来帮助改进的，那么类似这些帮助在 `Github` 上协作的文档就可以放在 `.github` 目录下。常见的会放入以下文件：
+如果你的项目是与他人合作或者希望其他人来帮助改进，那么这些帮助在 `Github` 上协作的文档就可以放在 `.github` 目录下。常见的会放入以下文件：
 
 1. `COMMIT_CONVENTION.md`：该文档是 `Commit` 规范的内容，帮助其他开发者知道项目需要如何 `Commit`
 1. `CONTRIBUTING.md`：该文档是告诉其他开发者要怎么样对该项目进行贡献的
@@ -243,10 +255,12 @@ jobs:
 
 ### <a name="template" href="#template">设置仓库为模版仓库</a>
 
-1. 将创建好的模版仓库上传到 `Github`
-1. 在 `Github` 的模版仓库的 `Settings` 选项卡中勾选中 `Template repository` 一项
+1. 将创建好的仓库上传到 `Github`
+1. 在 `Github` 仓库的 `Settings` 选项卡中勾选中 `Template repository` 一项
 
     ![template repository](https://raw.githubusercontent.com/vabaly/picture/master/20191011_template_choose.png)
+
+这样你的仓库就变成一个模版仓库了。
 
 ### <a name="using" href="#using">使用模版仓库</a>
 
@@ -254,7 +268,7 @@ jobs:
 
 ![use this template](https://raw.githubusercontent.com/vabaly/picture/master/20191011-use-this-template.png)
 
-点击此按钮就可以基于该仓库创建一个新的仓库，试试看吧。
+点击此按钮就可以基于该模版仓库创建一个新的仓库了，试试看吧。
 
 ## <a name="talk" href="#talk">交流</a>
 
