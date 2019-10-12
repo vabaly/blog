@@ -216,7 +216,7 @@ jobs:
 
 几乎每一个开源项目都会写 `CHANGELOG`，它和 `README` 一样重要。请注意，`CHANGELOG` 是写给未来的自己或参与项目的其他人看的，更是写给用户看的。所以这里就不推荐自动把 `Commit` 拼凑成 `CHANGELOG` 的工具了，除非你的 `Commit` 信息写的足够人性化，那么你倒是可以用一用 [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)。
 
-我更建议新手手动写 `CHANGELOG`，和 `README` 一样，`CHANGELOG` 在社区也有一套 [keep a changelog](http://keepachangelog.com) 规范，它会教你如何把 `CHANGELOG` 写好。
+我更建议新手手动写 `CHANGELOG`，和 `README` 一样，`CHANGELOG` 在社区也有一套 [keep a changelog](https://keepachangelog.com/zh-CN/1.0.0/) 规范，它会教你如何把 `CHANGELOG` 写好。
 
 ### <a name="license" href="#license">协议</a>
 
