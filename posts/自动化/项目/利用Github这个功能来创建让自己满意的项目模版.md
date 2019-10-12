@@ -1,4 +1,6 @@
-# 利用 Github 这个功能来创建让自己满意的项目模版
+# 快来利用 Github 这个功能来创建让自己满意的项目模版吧
+
+我承认我实在想不出更好的标题了，因为本文涉及到的内容实在太多。但我保证，本文会尽可能做到抛砖引玉的效果。不仅仅是创建项目模版，写项目的时候需要考虑的东西本文也适合。
 
 本文主要会讲以下几个内容：
 
@@ -27,6 +29,7 @@
 - [基于模版仓库创建新的项目](#create)
     - [设置仓库为模版仓库](#template)
     - [使用模版仓库](#using)
+    - [后期工作](#after)
 - [交流](#talk)
 
 ## <a name="background" href="#background">背景</a>
@@ -255,7 +258,7 @@ jobs:
 
 ### <a name="template" href="#template">设置仓库为模版仓库</a>
 
-1. 将创建好的仓库上传到 `Github`
+1. 将创建好的仓库上传到 `Github`（切记不要把模版仓库的 `package-lock.json` 上传上去，但同时 `.gitignore` 不能忽略它，因为新项目需要上传上去）
 1. 在 `Github` 仓库的 `Settings` 选项卡中勾选中 `Template repository` 一项
 
     ![template repository](https://raw.githubusercontent.com/vabaly/picture/master/20191011_template_choose.png)
@@ -269,6 +272,13 @@ jobs:
 ![use this template](https://raw.githubusercontent.com/vabaly/picture/master/20191011-use-this-template.png)
 
 点击此按钮就可以基于该模版仓库创建一个新的仓库了，试试看吧。
+
+### <a name="after" href="#after">后期工作</a>
+
+新仓库被创建后，克隆下来，会有几个地方需要修改，可以在设计模版仓库时使用一些技巧并借助编辑器批量完成：
+
+1. 新仓库的名称批量修改。设计模版仓库时凡是要修改成项目名称的地方都写上模版仓库的名称，然后在新项目中搜索它并全部替换成新仓库的名称。
+1. `package.json` 的 `description` 要修改成对新仓库的描述。
 
 ## <a name="talk" href="#talk">交流</a>
 
