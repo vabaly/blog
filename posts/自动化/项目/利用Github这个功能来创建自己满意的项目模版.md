@@ -23,9 +23,10 @@
     - [CHANGELOG](#changelog)
     - [协议](#license)
     - [`.github` 目录](#github)
- - [基于模版仓库创建新的项目](#create)
+- [基于模版仓库创建新的项目](#create)
     - [设置仓库为模版仓库](#template)
     - [使用模版仓库](#using)
+- [交流](#talk)
 
 ## <a name="background" href="#background">背景</a>
 
@@ -252,7 +253,7 @@ jobs:
 
 点击此按钮就可以基于该仓库创建一个新的仓库，试试看吧。
 
-## <a>交流</a>
+## <a name="talk" href="#talk">交流</a>
 
 大家有兴趣可以[关注一下我的博客](https://github.com/vabaly/blog)，也可以关注我的公众号「前端拾贝」，以获取更多原创好文，并在讨论区进行交流。这些文章都是来自于**日常开发中的总结**，对**理论和实践**都比较有帮助：：
 
