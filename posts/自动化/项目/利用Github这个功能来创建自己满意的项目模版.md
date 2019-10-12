@@ -252,8 +252,8 @@ jobs:
 
 点击此按钮就可以基于该仓库创建一个新的仓库，试试看吧。
 
-## 宣传
+## <a>交流</a>
 
-欢迎大家 [Star 笔者的 Github](https://github.com/vabaly/blog)，另外，也欢迎大家关注笔者的公众号，获取最新文章的推送：
+大家有兴趣可以[关注一下我的博客](https://github.com/vabaly/blog)，也可以关注我的公众号「前端拾贝」，以获取更多原创好文，并在讨论区进行交流。这些文章都是来自于**日常开发中的总结**，对**理论和实践**都比较有帮助：：
 
 ![微信公众号二维码](https://raw.githubusercontent.com/vabaly/picture/master/imageswechat-qrcode.jpg)
