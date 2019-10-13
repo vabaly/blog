@@ -1,6 +1,6 @@
 # 快来利用 Github 这个功能来创建让自己满意的项目模版吧
 
-我承认我实在想不出更好的标题了，因为本文涉及到的内容实在太多。但我保证，本文会尽可能做到抛砖引玉的效果。不仅仅是创建项目模版，写项目的时候需要考虑的东西本文也适合。
+我承认我实在想不出更好的标题了，因为本文涉及到的内容比较宽泛。但我保证，本文会尽可能做到抛砖引玉的效果。不仅仅是创建项目模版，写项目的时候需要考虑的东西本文也适合。
 
 本文主要会讲以下几个内容：
 
@@ -24,7 +24,7 @@
     - [CI / CD](#ci-cd)
     - [文档](#docs)
     - [CHANGELOG](#changelog)
-    - [协议](#license)
+    - [协议](#licenses)
     - [`.github` 目录](#github)
 - [基于模版仓库创建新的项目](#create)
     - [设置仓库为模版仓库](#template)
@@ -67,7 +67,7 @@
 1. 从空间上看，项目不是很小，有一定复杂度
 1. 从情感上看，想要引入类型系统让自己舒心，或者喜欢写类型和接口
 
-#### <a name="typescript" href="#typescript-tips">Tips</a>
+#### <a name="typescript-tips" href="#typescript-tips">Tips</a>
 
 1. 本地安装 `typescript` 后，可以使用 `npx tsc --init` 来生成一份 `tsconfig.json` 文件。该文件列有 `TypeScript` 所有的配置，你只需要取消相应配置的注释就可以启用它了。**这个配置最好放在项目模版里，省得每次都要复制粘贴。**
 
@@ -229,19 +229,19 @@ jobs:
 
 良好的 `README` 文件能够使你的项目更容易理解和使用，多语言的 `README` 更会使你的项目大放异彩。一般 `README.md` 文件是英文文档，`README.zh-CN.md` 是中文文档。**强烈建议新手按照 [Standard Readme Style](https://github.com/RichardLitt/standard-readme) 规范来编写自己的文档**，多写几遍，你就明白 `README` 该写些什么东西了。
 
-### <a name="docs" href="#docs">CHANGELOG</a>
+### <a name="changelog" href="#changelog">CHANGELOG</a>
 
 几乎每一个开源项目都会写 `CHANGELOG`，它和 `README` 一样重要。请注意，`CHANGELOG` 是写给未来的自己或参与项目的其他人看的，更是写给用户看的。所以这里就不推荐自动把 `Commit` 拼凑成 `CHANGELOG` 的工具了，除非你的 `Commit` 信息写的足够人性化，那么你倒是可以用一用 [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)。
 
 我更建议新手手动写 `CHANGELOG`，和 `README` 一样，`CHANGELOG` 在社区也有一套 [keep a changelog](https://keepachangelog.com/zh-CN/1.0.0/) 规范，它会教你如何把 `CHANGELOG` 写好。
 
-### <a name="license" href="#license">协议</a>
+### <a name="licenses" href="#licenses">协议</a>
 
 养成书写协议的习惯，从而对多数开源项目的版权有一定了解，也对自己未来的开源项目需要使用哪些协议有清晰的认识。一般来说都是采用 `MIT` 协议，这是最为宽松的协议。**如果你还不知道该使用什么协议，[那么这个网站可以帮到你](http://choosealicense.online/)。**
 
 在你项目模版的 `README` 末尾，写上协议名称和仓库作者。另外再创建一个 `LICENSE` 文件，写明协议的详细信息。
 
-### <a name="commit" href="#commit">`.github` 目录</a>
+### <a name="github" href="#github">`.github` 目录</a>
 
 如果你的项目是与他人合作或者希望其他人来帮助改进，那么这些帮助在 `Github` 上协作的文档就可以放在 `.github` 目录下。常见的会放入以下文件：
 
