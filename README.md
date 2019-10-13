@@ -6,7 +6,7 @@
 
 ### 工程化
 
-1. [利用 Github 这个功能来创建让自己满意的项目模版](https://github.com/vabaly/blog/issues/3)
+1. [快来利用 Github 这个功能来创建让自己满意的项目模版吧](https://github.com/vabaly/blog/issues/3)
 
 ### 自动化测试
 
